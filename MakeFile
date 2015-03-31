@@ -1,0 +1,4 @@
+!/bin/bash
+clear
+gcc u$1.c -o $1
+exit 0
