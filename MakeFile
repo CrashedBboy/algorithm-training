@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/zsh
 clear
-gcc u$1.c -o $1
+gcc u$1.c -Wall -o $1
 exit 0
