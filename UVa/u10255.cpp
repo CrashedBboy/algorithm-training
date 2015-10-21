@@ -11,9 +11,16 @@ typedef struct {
 int size, startx, starty;
 vector< vector<int> > board;
 vector<int> possibleStep;
-int dir[8][2] = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1},
-									{-1, -2}, {-1, 2}, {1, -2}, {1, 2}};
 vector<int>::iterator it;
+int dir[8][2] = {{-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {-1, 2}, {1, -2}, {1, 2}};
+
+Step step(int, int);
+void travel(Step);
+void possible(Step, vector<int>&);
+Step get(Step, int);
+Step hard(Step);
+bool isVisitable(Step);
+void print_solution();
 
 int main(void) {
 	while (scanf("%d %d %d\n", &size, &startx, &starty) != EOF) {
@@ -37,11 +44,10 @@ void travel(Step start) {
 	for (int i = 2; i < size * size + 1; i++) {
 		possible(current, possibleStep);
 		int c = possibleStep.size();
-		printf("possibleStep[].size = %d\n", c);
 		if(c == 0)
 			break;
 		if(c == 1)
-			current = get(ceurrent, 1);
+			current = get(current, 1);
 		else
 			current = hard(current);
 		board[current.x][current.y] = i;
@@ -71,7 +77,7 @@ Step hard(Step current) {
 		vector<int> nextPossibleStep;
 		Step s = get(current, i + 1);
 		possible(s, nextPossibleStep);
-		if(nextPossibleStep.size() < minPossibleStep.size){
+		if(nextPossibleStep.size() < minPossibleStep.size()){
 			min = i;
 			minPossibleStep.clear();
 			minPossibleStep.assign(nextPossibleStep.begin(), nextPossibleStep.end());
@@ -83,4 +89,12 @@ Step hard(Step current) {
 
 bool isVisitable(Step s) {
 	return !board[s.x][s.y];
+}
+
+void print_solution() {
+	for(int i = 0; i <= size; i++) {
+		for(int j = 0; j <= size; j++) {
+			
+		}
+	}
 }
