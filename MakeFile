@@ -1,5 +1,0 @@
-#!/bin/zsh
-CC=gcc
-clear
-$CC u$1.c -Wall -o $1
-exit 0
