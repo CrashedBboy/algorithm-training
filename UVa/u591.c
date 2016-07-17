@@ -17,10 +17,7 @@ int main(void) {
 				ans += diff;
 			}
 		}
-		if (round >= 1) {
-			printf("\n");
-		}
-		printf("Set #%d\nThe minimum number of moves is %d.\n", round, ans);
+		printf("Set #%d\nThe minimum number of moves is %d.\n\n", round, ans);
 		round += 1;
 	}
 	return 0;
