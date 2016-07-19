@@ -19,10 +19,14 @@ int main() {
 			if (digit_sum > 9) {
 				carry += 1;
 				digit_carry = 1;
+			} else {
+				digit_carry = 0;
 			}
 		}
 		if (carry == 0) {
 			cout << "No carry operation." << endl;
+		} else if (carry == 1) {
+			cout << "1 carry operation." << endl;
 		} else {
 			cout << carry << " carry operations." << endl;
 		}
