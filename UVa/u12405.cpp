@@ -6,7 +6,7 @@ int main(void) {
 	int round;
 	cin >> round;
 	for (int i = 0; i < round; i++) {
-		int len, ptr = 0, count = 0;
+		int len, ptr = -1, count = 0;
 		string field;
 		cin >> len >> field;
 		for (int j = 0; j < len; j++) {
