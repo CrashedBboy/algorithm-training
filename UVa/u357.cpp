@@ -1,13 +1,13 @@
 #include <iostream>
+#include "string.h"
 
 using namespace std;
 
 int main(void) {
-	long long dp[30000];
+	long long int dp[30001] = {1};
 	int coin[5] = {1, 5, 10, 25, 50};
-	dp[0] = 1;
 	for (int i = 0; i < 5; i++) {
-		for (int j = coin[i]; j < 30000; j++) {
+		for (int j = coin[i]; j < 30001; j++) {
 			dp[j] += dp[j - coin[i]];
 		}
 	}
