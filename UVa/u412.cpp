@@ -25,7 +25,7 @@ int main(void) {
 		if (coprime == 0)
 			cout << "No estimate for this data set." << endl;
 		else
-			cout << fixed << setprecision(6) << sqrt((float)((n * (n-1) * 6) / 2) / (float)coprime ) << endl;
+			cout << fixed << setprecision(6) << sqrt((double)((n * (n-1) * 6) / 2) / (double)coprime ) << endl;
 	}
 	return 0;
 }
