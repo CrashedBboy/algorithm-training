@@ -9,7 +9,7 @@ int main(void) {
 	power.reserve(100);
 	shutdown.reserve(100);
 	while (cin >> n && n != 0) {
-		for (int i = 2; i < n; i++) {
+		for (int i = 1; i > 0; i++) {
 			power.clear();
 			shutdown.clear();
 			for (int j = 1; j < n; j++) {
@@ -26,6 +26,7 @@ int main(void) {
 			}
 			if (shutdown.back() == 12 && shutdown.size() == n - 1) {
 				cout << i << endl;
+				break;
 			}
 		}
 	}
