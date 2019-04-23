@@ -85,7 +85,6 @@ class LinkedList {
 
         // other operations
         void reverse(void);
-        void sort(void);
 
     private:
         int _len;
@@ -358,6 +357,116 @@ void LinkedList::insertAt(int index, int data) {
     _len += 1;
 }
 
+ListNode* LinkedList::popFront(void) {
+
+    if (_len == 0) {
+
+        return NULL;
+    }
+
+    if (_len == 1) {
+
+        delete _first;
+
+        _first = NULL;
+        _last = NULL;
+
+        _len -= 1;
+
+    } else {
+
+        ListNode* newFirst = _first->next();
+
+        delete _first;
+
+        _first = newFirst;
+
+        _len -= 1;
+    }
+}
+
+ListNode* LinkedList::popBack(void) {
+
+    if (_len == 0) {
+
+        return NULL;
+    }
+
+    if (_len == 1) {
+
+        delete _last;
+
+        _first = NULL;
+        _last = NULL;
+
+        _len -= 1;
+
+    } else {
+
+        ListNode* newLast = _last->prev();
+
+        delete _last;
+
+        _last = newLast;
+
+        _len -= 1;
+    }
+}
+
+void LinkedList::deleteNode(ListNode* target) {
+
+    if (_len == 0) {
+
+        return;
+    }
+
+    if (_len == 1) {
+
+        delete _first;
+
+        _first = NULL;
+        _last = NULL;
+        _len -= 1;
+
+        return;
+    }
+
+    ListNode* current = _first;
+
+    for (int i = 0; i < _len; i++) {
+
+        if (current == target) {
+
+            ListNode* prev = current->prev();
+            ListNode* next = current->next();
+
+            delete current;
+
+            if (prev != NULL) {
+
+                prev->setNext(next);
+
+            } else {
+
+                _first = next;
+            }
+            
+            if (next != NULL) {
+
+                next->setPrev(prev);
+
+            } else {
+
+                _last = prev;
+            }
+            
+            _len -= 1;
+
+            break;
+        }
+    }
+}
+
 // clear all nodes in linked list
 void LinkedList::clear(void) {
 
@@ -376,6 +485,28 @@ void LinkedList::clear(void) {
 
     _first = NULL;
     _last = NULL;
+}
+
+// reverse list order
+void LinkedList::reverse(void) {
+
+    ListNode* current = _first;
+
+    for (int i = 0; i < _len; i++) {
+
+        ListNode* oldNext = current->next();
+
+        current->setNext(current->prev());
+
+        current->setPrev(oldNext);
+
+        current = current->next();
+    }
+
+    ListNode* oldFirst = _first;
+
+    _first = _last;
+    _last = _first;
 }
 
 int main() {
