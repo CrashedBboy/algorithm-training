@@ -239,7 +239,9 @@ void LinkedList::pushFront(int data) {
     ListNode* newNode = new ListNode(NULL, _first, data);
 
     // let original head->prev points to newly created node
-    _first->setPrev(newNode);
+    if (_first != NULL) {
+        _first->setPrev(newNode);
+    }
 
     // make _first point to newly created node
     _first = newNode;
@@ -260,7 +262,10 @@ void LinkedList::pushBack(int data) {
 
     ListNode* newNode = new ListNode(_last, NULL, data);
 
-    _last->setNext(newNode);
+    if (_last != NULL) {
+
+        _last->setNext(newNode);
+    }
 
     _last = newNode;
 
@@ -366,22 +371,26 @@ ListNode* LinkedList::popFront(void) {
 
     if (_len == 1) {
 
-        delete _first;
+        ListNode* popped = _first;
 
         _first = NULL;
         _last = NULL;
 
         _len -= 1;
 
+        return popped;
+
     } else {
 
-        ListNode* newFirst = _first->next();
+        ListNode* popped = _first;
 
-        delete _first;
+        ListNode* newFirst = _first->next();
 
         _first = newFirst;
 
         _len -= 1;
+
+        return popped;
     }
 }
 
@@ -394,39 +403,32 @@ ListNode* LinkedList::popBack(void) {
 
     if (_len == 1) {
 
-        delete _last;
+        ListNode* popped = _last;
 
         _first = NULL;
         _last = NULL;
 
         _len -= 1;
 
+        return popped;
+
     } else {
 
-        ListNode* newLast = _last->prev();
+        ListNode* popped = _last;
 
-        delete _last;
+        ListNode* newLast = _last->prev();
 
         _last = newLast;
 
         _len -= 1;
+
+        return popped;
     }
 }
 
 void LinkedList::deleteNode(ListNode* target) {
 
     if (_len == 0) {
-
-        return;
-    }
-
-    if (_len == 1) {
-
-        delete _first;
-
-        _first = NULL;
-        _last = NULL;
-        _len -= 1;
 
         return;
     }
@@ -459,7 +461,7 @@ void LinkedList::deleteNode(ListNode* target) {
 
                 _last = prev;
             }
-            
+
             _len -= 1;
 
             break;
@@ -500,16 +502,48 @@ void LinkedList::reverse(void) {
 
         current->setPrev(oldNext);
 
-        current = current->next();
+        current = oldNext;
     }
 
     ListNode* oldFirst = _first;
 
     _first = _last;
-    _last = _first;
+    _last = oldFirst;
 }
 
 int main() {
+
+    LinkedList* list = new LinkedList();
+
+    // initial status
+    printf("initial length: %d\n", list->getLength());
+    list->print();
+
+    list->pushFront(5);
+    list->pushFront(25);
+
+    printf("length: %d\n", list->getLength());
+    list->print();
+
+    list->pushBack(7);
+    list->pushBack(49);
+
+    printf("length: %d\n", list->getLength());
+    list->print();
+
+    list->popFront();
+    list->popBack();
+
+    printf("length: %d\n", list->getLength());
+    list->print();
+
+    list->reverse();
+    list->print();
+
+    list->clear();
+
+    printf("length: %d\n", list->getLength());
+    list->print();
 
     return 0;
 }
