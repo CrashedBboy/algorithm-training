@@ -20,7 +20,7 @@ cin >> buffer;
 cout << "Your input: " << buffer << endl;
 
 // or, print by printf()
-printf("echo: %s\n", input.c_str()); // %s is used for C-style char[]
+printf("echo: %s\n", buffer.c_str()); // %s is used for C-style char[]
 ```
 
 get multiple input:
